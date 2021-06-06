@@ -37,6 +37,7 @@ const webpackBaseConfig = {
   output: {
     path: paths.dist,
     filename: '[name].bundle.js',
+    chunkFilename: '[id].[contenthash:8].js',
     publicPath: '/'
   },
   resolve: {

@@ -13,8 +13,8 @@ const webpackProdConfig = merge(base, {
   module: {},
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].[contenthash].css',
-      chunkFilename: '[id].css'
+      filename: 'styles/[name].[contenthash:8].css',
+      chunkFilename: '[id].[contenthash:8].css'
     }),
     ...(isAnalyze ? [new BundleAnalyzerPlugin()] : [])
   ],
