@@ -26,6 +26,18 @@ const webpackProdConfig = merge(base, {
     },
     splitChunks: {
       cacheGroups: {
+        cacheGroups: {
+          commons: {
+            test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom)[\\/]/,
+            name: 'vendors',
+            chunks: 'all'
+          },
+          default: {
+            minChunks: 2,
+            priority: -20,
+            reuseExistingChunk: true
+          }
+        },
         styles: {
           name: 'styles',
           test: /\.css$/,
