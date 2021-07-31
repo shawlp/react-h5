@@ -10,10 +10,10 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="expires" content="0" />
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; connect-src * ws://* wss://*; style-src * 'unsafe-inline' 'unsafe-eval'; media-src * ; img-src * data:; font-src * ; script-src * 'unsafe-inline' 'unsafe-eval';" />
     <!-- <link rel="dns-prefetch" href="//domain.com" /> -->
     <!-- <link rel="preload" href="//domain.com" />  -->
-    <!-- <link rel="prerender" href="//domain.com" />  -->
+    <!-- <link rel="prerender" href="//domain.com" />  -->  
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
