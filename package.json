@@ -12,7 +12,7 @@
     "lint": "eslint --fix --ext .ts,.tsx,.less .",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "prepare": "husky install",
-    "pre-commit": "commitlint -E HUSKY_GIT_PARAMS && lint-staged"
+    "lint-staged": "lint-staged"
   },
   "keywords": [
     "react",
