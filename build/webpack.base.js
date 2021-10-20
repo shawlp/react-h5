@@ -3,7 +3,6 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const ESLintPlugin = require('eslint-webpack-plugin')
 const path = require('path')
 const paths = require('./paths')
 const config = require('../config')
@@ -66,11 +65,6 @@ const webpackBaseConfig = {
       template: `${paths.static}/index.html`,
       filename: 'index.html'
     }),
-    new ESLintPlugin({
-      files: ['src/**/*.js', 'src/**/*.ts', 'src/**/*.jsx', 'src/**/*.tsx'],
-      failOnWarning: true,
-      threads: true
-    }),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -83,17 +77,31 @@ const webpackBaseConfig = {
   module: {
     rules: [
       ...(config.dev.useEslint ? [createEslintRule()] : []),
+      // {
+      //   test: /\.(tsx?|js)$/,
+      //   use: [
+      //     'thread-loader',
+      //     {
+      //       loader: 'babel-loader',
+      //       options: { cacheDirectory: true, cacheCompression: false }
+      //     },
+      //     ...(isPro ? [webpackStripLoader] : [])
+      //   ],
+      //   exclude: /node_modules/
+      // },
       {
-        test: /\.(tsx?|js)$/,
+        test: /\.(js|ts|jsx|tsx)$/,
+        exclude: /node_modules/,
         use: [
-          'thread-loader',
           {
-            loader: 'babel-loader',
-            options: { cacheDirectory: true, cacheCompression: false }
+            loader: 'esbuild-loader',
+            options: {
+              loader: 'tsx',
+              target: 'es2015',
+            },
           },
           ...(isPro ? [webpackStripLoader] : [])
-        ],
-        exclude: /node_modules/
+        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)(\?.*)?$/,
@@ -113,7 +121,7 @@ const webpackBaseConfig = {
         type: 'asset'
       },
       {
-        test: /\.(less|css)$/,
+        test: /\.less$/,
         use: [
           loader,
           {
@@ -129,6 +137,10 @@ const webpackBaseConfig = {
           'postcss-loader',
           'less-loader'
         ]
+      },
+      {
+        test: /\.css$/,
+        use: [loader, 'css-loader']
       },
       {
         test: /\.scss$/,

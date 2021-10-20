@@ -1,11 +1,3 @@
-function getArgvEnv() {
-  const index = process.argv.findIndex((item) => item === '--env')
-  return process.argv[index + 1] || 'test'
-}
-
-/** 是否是unix内核 */
-const isUnixSystem = process.platform === 'darwin'
-
 module.exports = {
   dev: {
     proxyTable: {
@@ -17,8 +9,7 @@ module.exports = {
     useEslint: true,
     host: '127.0.0.1',
     port: 8888,
-    open: isUnixSystem ? 'Google Chrome' : false
+    open: true
   },
-  build: {},
-  proxy_mock: getArgvEnv()
+  build: {}
 }
